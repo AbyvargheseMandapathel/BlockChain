@@ -7,6 +7,8 @@ contract SimpleStorage {
     uint256   favouriteNumber;
     //People public person = People({favouriteNumber:2, name:"Aby"});
 
+    mapping(string => uint256) public nameToFavouriteNumber;
+
     struct People {
         uint256 favouriteNumber;
         string name;
@@ -26,5 +28,9 @@ contract SimpleStorage {
 
     function addPerson(string memory _name, uint256 _favouriteNumber) public{
         people.push(People(_favouriteNumber, _name));
+        //calldata - cannot modify temporary
+        //memory - can modify temporary
+        //storage - Permanent
+        nameToFavouriteNumber[_name] = _favouriteNumber;
     }
 }
